@@ -1,0 +1,16 @@
+#summary This page describes what you need to get started.
+
+= Prerequisites =
+
+== Linux ==
+On Linux you must have Mono installed on your system. Some Linux distributions come with Mono installed by default anyway. If not please follow the download page of Mono project site which can be found [http://www.go-mono.com/mono-downloads/download.html here].
+
+== MacOS X ==
+In order to run the tool on Mac OS X you must install Mono on your system. If not already done you can download Mono for your Mac [http://www.go-mono.com/mono-downloads/download.html here]
+
+== Windows ==
+You need to have .NET runtime installed on your machine. You can use 'Windows Update' for installing .NET runtime or you can download it directly from Microsoft web page [http://www.microsoft.com/Net/Download.aspx here].
+
+= Installation =
+
+Installation is pretty easy, because there is no special procedure. Just unpack the downloaded zip-File. I would recommend, however, to put the single `MarkEmptyDirs.exe` file into the search PATH of your operating system.

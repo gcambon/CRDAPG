@@ -1,0 +1,240 @@
+# .bashrc.RESILIENCE
+# script d'init de l'environnement sous bash pour cygwin ou linux
+
+#echo "source ${DRIVE}/${CRUISE}/local/etc/skel/.bashrc.${CRUISE}"
+export CRUISElc=$(echo $CRUISE | tr '[:upper:]' '[:lower:]') #lowercase
+export CRUISEidlc=$(echo $CRUISEid | tr '[:upper:]' '[:lower:]') #lowercase
+
+# prompt du shell
+export PS1='[\[\033[32m\]\h:\[\033[31m\]\u\[\033[00m\]]\[\033[35m\]\w\[\033[00m\]\n> '
+
+# chemin d'acces aux donnes
+export DATA=${DRIVE}/${CRUISE}
+
+# chemin des scripts locaux
+export LOCAL=${DRIVE}/${CRUISE}/local
+
+# plot profiles and sections
+export NC_DIR=netcdf
+export PROF_DIR=plots/python
+export SECT_DIR=coupes/python
+
+# rajoute les chemins des scripts et du repertoire courant
+#export PATH=$PATH:${LOCAL}/sbin:/usr/local/netcdf-3.6.2/bin:.
+export PATH=$PATH:${LOCAL}/sbin:.
+
+#if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+#fi
+    
+export ROSCOP_CSV=$DRIVE/$CRUISE/local/code_roscop.csv
+export OCEANO2OCEANSITES_PL='oceano2oceansites.pl'
+export IMG2HTML='img2html.rb'
+
+# for go program
+
+# alias
+alias ssht='ssh -l science thalassa'
+alias sshl='ssh -l science 192.168.51.217' # pc traitement sous Linux
+
+# alias to list functions (typeset -F or declare -F)
+alias functions='typeset -F'
+
+# alias des commandes
+alias ncdump='ncdump -p5'
+alias matlab='matlab -nodesktop -nosplash'
+
+# alias des repertoires pour la campagne
+alias DATAP='cd ${DATA}/data-processing'
+alias DATAR='cd ${DATA}/data-raw'
+
+#alias CTD='cd /c/seasoft/${CRUISE}'
+alias CTD='cd ${DATA}/data-processing/CTD'
+alias ADJ='cd ${DATA}/data-ajustage/CTD'
+alias CODAC='cd ${DATA}/data-processing/CTD/codac'
+alias BTL=CTD
+alias XBT='cd ${DATA}/data-processing/CELERITE'
+alias THERMO='cd ${DATA}/data-processing/THERMO'
+alias TSG=THERMO
+alias CASINO='cd ${DATA}/data-processing/CASINO'
+alias BATOS='cd ${DATA}/data-processing/BATOS'
+alias COLCOR='cd ${DATA}/data-processing/COLCOR'
+alias TECHSAS='cd ${DATA}/data-processing/TECHSAS'
+alias LADCP='cd ${DATA}/data-processing/LADCP'
+alias LDEO='cd ${DATA}/data-processing/LADCP/process'
+alias MODELS='cd ${DATA}/data-processing/MODELS'
+alias CASCADE='cd ${DATA}/data-processing/SADCP'
+alias OS150='cd ${DATA}/data-processing/SADCP/OS150'
+alias OS38='cd ${DATA}/data-processing/SADCP/OS38'
+alias SADCP=CASCADE
+alias CODAS='cd ${DATA}/data-processing/SADCP/CODAS'
+alias RADIOSONDAGE='cd ${DATA}/data-processing/RADIOSONDAGE'
+alias RSM=RADIOSONDAGE
+
+alias plog='cat ${DRIVE}/${CRUISE}/local/logs/process.log'
+alias viplog='gvim ${DRIVE}/${CRUISE}/local/logs/process.log'
+alias slog='cat ${DRIVE}/${CRUISE}/local/logs/synchro.log'
+alias vislog='gvim ${DRIVE}/${CRUISE}/local/logs/synchro.log'
+
+# CTD avec tous les capteurs primaires et l'option --top
+alias ctd='perl ctd-all.pl data/asc/"$CRUISEidlc"0??.hdr --echo --dtd=local --top --all'
+alias ctdnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_ctd.xml --output=netcdf/OS_"${CRUISE}"_CTD.nc'
+# CTD  avec tous les capteurs primaires et secondaires
+alias ctdall='perl ctd-all.pl data/asc/"$CRUISEidlc"0??.hdr --echo --dtd=local --xml --ctd_all'
+alias ctdallnc='$OCEANO2OCEANSITES_PL --echo --nodtd --short ascii/"$CRUISElc"-all_ctd.xml --output=netcdf/OS_"${CRUISE}"-ALL_CTD.nc'
+
+
+# bouteilles
+alias btl='perl btl-all.pl --echo --dtd=local data/btl/"$CRUISEidlc"*.btl'
+alias btlnc='$OCEANO2OCEANSITES_PL --echo  --short --nodtd ascii/"$CRUISElc"-all_btl.xml --output=netcdf/OS_"${CRUISE}"-ALL_BTL.nc'
+
+# XBT (CELERITE)
+alias xbt='perl xbt-edf.pl --echo --dtd=local data/*.edf --all'
+alias xbtnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_xbt.xml --output=netcdf/OS_"${CRUISE}"_XBT.nc'
+
+# LADCP
+alias ladcp='perl ldeo-ladcp.pl --echo --dtd=local profiles/"$CRUISEidlc"*.lad --ascii --xml'
+alias ladcpnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_adcp.xml --output=netcdf/OS_"${CRUISE}"_ADCP.nc'
+
+# THERMO et BATOS (sans le VENT) extrait des fichiers temps reels Colcor
+alias tsg='perl thermo-colcor.pl --echo --local --all data/*.COLCOR'
+alias ctd-tsg='perl ctd-tsg-spl.pl ../CTD/data/asc/"$CRUISEidlc"???.hdr --echo'
+alias tsgnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_tsg.xml --output=netcdf/OS_${CRUISE}_TSG.nc'
+
+# CASINO extrait les donnees TSG et METEO des fichiers csv 
+alias casino='perl casino.pl --echo --local data/*.csv --all'
+alias casinonc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_mto --output=netcdf/OS_"${CRUISE}"_MTO.nc'
+alias casinosndnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_snd --output=netcdf/OS_"${CRUISE}"_SND.nc'
+alias casinotsgnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_tsg --output=netcdf/OS_"${CRUISE}"_TSG.nc'
+alias casinofboxnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_fbox --output=netcdf/OS_"${CRUISE}"_FBOX.nc'
+
+# gestion HTML des images DD
+alias msgcol='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/MSGCOL -t "${CRUISE} - Meteosat couleur" -n 1'
+#alias msgcola='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/MSGCOL/ATLANTIQUE -t "ATLANTIQUE - Meteosat couleur" -n 1'
+alias sstamse='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/SSTAMSE -t "${CRUISE} - SST AMSE" -n 1'
+alias sstmetop='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/SSTMETOP -t "${CRUISE} - SST METOP" -n 1'
+alias windcdc='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/WINDCDC -t "${CRUISE} - WindCDC" -n 2'
+alias windws='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/WINDWS -t "${CRUISE} - Windsat RSS" -n 2'
+alias iwvamsr='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/IWVAMSR -t "${CRUISE} - IW ASR2 " -n 1'
+alias wspamsr='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/WSPAMSR -t "${CRUISE} - Wind speed ASR2" -n 1'
+alias sstostia='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/SSTOSTIA -t "${CRUISE} - SST OSTIA" -n 2'
+alias windascat='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/WINDASCAT -t "${CRUISE} - Wind ASCAT" -n 2'
+alias asstreynolds='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/ASSTREYNOLDS -t "${CRUISE} - SST anomaly Reynolds" -n 2'
+alias mercator1='$IMG2HTML -d /m/${CRUISE}/data-processing/MERCATOR_MODEL/SST -t "${CRUISE} - Mercator SST" -n 2'
+alias mercator2='$IMG2HTML -d /m/${CRUISE}/data-processing/MERCATOR_MODEL/SSS -t "${CRUISE} - Mercator SSS" -n 2'
+alias mercator3='$IMG2HTML -d /m/${CRUISE}/data-processing/MERCATOR_MODEL/COURANTS -t "${CRUISE} - Mercator Surface current" -n 2'
+#alias mercator4='$IMG2HTML -d /m/${CRUISE}/data-processing/MERCATOR/PSY4/SST -t "${CRUISE} - Mercator PSY4 SST" -n 2'
+#alias mercator5='$IMG2HTML -d /m/${CRUISE}/data-processing/MERCATOR/PSY4/SSS -t "${CRUISE} - Mercator PSY4 SSS" -n 2'
+#alias mercator6='$IMG2HTML -d /m/${CRUISE}/data-processing/MERCATOR/PSY4/SURFACE_CURRENT -t "${CRUISE} - Mercator PSY4 Surface current" -n 2'
+
+# ces alias peuvent etre executes en une fois avec la fonction products
+alias models=products
+alias cpm='\cp -rupv /m/${CRUISE}/data-processing/PRODUCTS /z/${CRUISE}'
+
+# alias de synchronisation des données bord vers mission
+alias synchro='sudo bash /mnt/campagnes/${CRUISE}/local/sbin/synchro.sh $CRUISE $DRIVE $CRUISEid'
+
+# alias des traitement mission realisees via la crontab, on peut egalement
+# utiliser la fonction bash 'pall'
+alias process='bash /mnt/campagnes/${CRUISE}/local/sbin/process-all.sh $CRUISE $CRUISEid $DRIVE'
+alias doall='synchro && process'
+
+# fonctions utilitaires
+function cruisetrk 
+{
+  CTD
+  cd tracks
+  $LOCAL/sbin/linux/cruiseTrack2kml-linux-amd64 -config local.toml -output $CRUISElc-local.kml 
+  $LOCAL/sbin/linux/cruiseTrack2kml-linux-amd64 -config config.toml -output $CRUISElc.kml 
+}
+
+# les fonctions pour les traitements globaux
+# list of functions: declare -F or typeset -F
+function pctd
+{
+  echo ""
+  echo "CTD processing:"
+  echo "---------------"
+  CTD
+  ctd
+  ctdnc
+  echo "BTL processing:"
+  echo "---------------"
+  btl
+  btlnc
+}
+
+function ptsg
+{
+  echo ""
+  echo "TSG processing:"
+  echo "---------------"
+  TSG
+  tsg
+  tsgnc
+  ctd-tsg
+}
+
+function pxbt
+{
+  echo ""
+  echo "XBT processing:"
+  echo "---------------"
+  XBT
+  xbt
+  xbtnc
+}
+
+function pladcp
+{
+  echo ""
+  echo "LADCP processing:"
+  echo "-----------------"
+  LADCP
+  ladcp
+  ladcpnc
+}
+
+function pcasino
+{
+  echo ""
+  echo "CASINO processing:"
+  echo "------------------"
+  CASINO
+  casino
+  casinonc
+  casinosndnc
+  casinotsgnc
+  casinofboxnc
+}
+
+function products
+{
+  echo ""
+  echo "Products processing:"
+  echo "--------------------"
+  msgcol
+  sstamse
+  sstmetop
+  windcdc
+  windws
+  iwvamsr
+  wspamsr
+  sstostia
+  windascat
+  mercator1
+  mercator2
+  mercator3
+}
+
+function pall
+{
+  pctd
+  pxbt
+  pladcp
+  ptsg
+  pcasino
+  #products
+  cruisetrk
+}
+
+echo "Ok..."

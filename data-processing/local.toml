@@ -1,0 +1,46 @@
+# this is a configuration file for cruiseTrack2kml program
+
+cruise = "RESILIENCE"
+ship = "MARION-DUFRESNE"
+sizePlots = 700
+stationNumber = true
+
+[ctd]
+File = "/RESILIENCE/data-processing/CTD/ascii/resilience.ctd"
+Prefix = 3
+Skip = 1
+Split = "PRFL,1,int,BEGIN_DATE,2,string,BEGIN_TIME,3,string,END_DATE,4,string,END_TIME,5,string,LAT,6,string,LAT_S,7,string,LON,8,string,LON_S,9,string,PMAX,10,float64,BOTTOM_DEPTH,11,float64"
+Plots = "http://192.168.51.217/RESILIENCE/CTD/python/RESILIENCE-%s_CTD.png"
+
+[xbt]
+File = "/RESILIENCE/data-processing/CELERITE/ascii/resilience.xbt"
+Prefix = 3
+Skip = 2
+Split = "PRFL,1,int,BEGIN_DATE,2,string,BEGIN_TIME,3,string,LAT,4,string,LAT_S,5,string,LON,6,string,LON_S,7,string,PMAX,8,float64,PROBE,9,string"
+Plots = "http://192.168.51.217/RESILIENCE/CELERITE/RESILIENCE-%s_XBT.png"
+
+[adcp]
+File = "/RESILIENCE/data-processing/LADCP/ascii/resilience.adcp"
+Prefix = 3
+Skip = 3
+Split = "PRFL,1,int,BEGIN_DATE,2,string,BEGIN_TIME,3,string,LAT,4,string,LAT_S,5,string,LON,6,string,LON_S,7,string,PMAX,8,float64"
+Plots = "http://192.168.51.217/RESILIENCE/LADCP/RESILIENCE-%s_ADCP.png"
+
+
+[tsg]
+#File = "none"
+File = "/RESILIENCE/data-processing/THERMO/ascii/resilience_tsg"
+Skip = 2
+#Split = "LATITUDE,2,float64,LONGITUDE,3,float64"
+Split = "LATITUDE,3,float64,LONGITUDE,4,float64"
+Plots = "http://192.168.51.217/RESILIENCE/THERMO/RESILIENCE_TSG_COLCOR_SCATTER.png"
+
+[windows]
+# run on cmd:
+# %GOBIN%/cruiseTrack2kml.exe -config local.toml
+Drive = "m:"
+
+[unix]
+# run on Linux or Mingw
+# $GOBIN/cruiseTrack2kml.exe -config local.toml
+Drive = "/m"

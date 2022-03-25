@@ -1,0 +1,24 @@
+@ seaplot AMOP
+@
+@ downcast
+@ trace en autoscale  TS O2 fluo
+seaplot /f%1  /i%2\data\cnv\d%1.cnv /o%2\plots\downcast /p%2\psa\seaplot\SeaPlot_autoscale1.psa
+@ trace en autoscale  TS 02 Fluos Chelsea Wetlabs 
+seaplot /f%1 /a-2  /i%2\data\cnv\d%1.cnv /o%2\plots\downcast /p%2\psa\seaplot\SeaPlot_autoscale2.psa
+@ trace en autoscale  TS 02 Cstar
+seaplot /f%1 /a-3  /i%2\data\cnv\d%1.cnv /o%2\plots\downcast /p%2\psa\seaplot\SeaPlot_autoscale3.psa
+@ comparaison TS + fluos Chelsea et Wetlabs
+seaplot /f%1 /a-fluos  /i%2\data\cnv\d%1.cnv /o%2\plots\fluos /p%2\psa\seaplot\SeaPlot_inter-fluos.psa
+@
+@ upcast
+@ trace en autoscale  TS O2 fluo
+seaplot /f%1 /i%2\data\cnv\u%1.cnv /o%2\plots\upcast /p%2\psa\seaplot\SeaPlot_autoscale1.psa
+@ trace en autoscale  TS 02 Fluos Chelsea Wetlabs 
+seaplot /f%1 /a-2  /i%2\data\cnv\u%1.cnv /o%2\plots\downcast /p%2\psa\seaplot\SeaPlot_autoscale2.psa
+@ trace en autoscale  TS 02 Cstar
+seaplot /f%1 /a-3  /i%2\data\cnv\u%1.cnv /o%2\plots\downcast /p%2\psa\seaplot\SeaPlot_autoscale3.psa
+@ comparaison TS + fluos Chelsea et Wetlabs
+seaplot /f%1 /a-fluos  /i%2\data\cnv\u%1.cnv /o%2\plots\fluos /p%2\psa\seaplot\SeaPlot_inter-fluos.psa
+@
+@ traceTS 
+seaplot /f%1 /a-ts /i%2\data\cnv\d%1.cnv /o%2\plots\TS /p%2\psa\seaplot\SeaPlot_ts.psa

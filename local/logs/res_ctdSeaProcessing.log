@@ -1,0 +1,37 @@
+COPY CTD RAW FILES 
+    res020[.hex, .XMLCON, .bl] from C:\SEASOFT\RESILIENCE\data\ to X:\CRUISES\RESILIENCE\data-raw\CTD\ 
+    res020[.hex, .xmlcon, .bl] from X:\CRUISES\RESILIENCE\data-raw\CTD\ to X:\CRUISES\RESILIENCE\data-processing\CTD\data\raw\ 
+END OF CTD COPY PROCESS 
+COPY LADCP RAW FILES 
+    C:\LADCP\RESILIENCE\download\resM020.000 and C:\LADCP\RESILIENCE\download\resS020.000 
+ to 
+    C:\LADCP\RESILIENCE\data\resM020.000 and C:\LADCP\RESILIENCE\data\resS020.000 
+COPY LADCP RAW FILES ON THE NETWORK 
+ then to 
+    X:\CRUISES\RESILIENCE\data-raw\LADCP\ 
+    X:\CRUISES\RESILIENCE\data-processing\LADCP\data\ 
+END OF LADCP COPY PROCESS 
+
+ CTD SBE PROCESSING 
+!SBEBatch.exe X:\CRUISES\RESILIENCE\data-processing\CTD\batch\ladcp.batch res020 X:\CRUISES\RESILIENCE\data-processing\CTD\  
+    End of convertion to cnv ascii for ladcp files 
+!SBEBatch.exe X:\CRUISES\RESILIENCE\data-processing\CTD\batch\codac.batch res020 X:\CRUISES\RESILIENCE\data-processing\CTD\  
+    End of the Codac Processing 
+!SBEBatch.exe X:\CRUISES\RESILIENCE\data-processing\CTD\batch\std.batch res020 X:\CRUISES\RESILIENCE\data-processing\CTD\  
+    End of the SBE Processing 
+!SBEBatch.exe X:\CRUISES\RESILIENCE\data-processing\CTD\batch\seaplot.batch res020 X:\CRUISES\RESILIENCE\data-processing\CTD\  
+    End of the SeaPlot Processing 
+!ConReport.exe X:\CRUISES\RESILIENCE\data-processing\CTD\data\raw\res020.xmlcon X:\CRUISES\RESILIENCE\data-processing\CTD\data\reports 
+    Report File generated 
+!SBEBatch.exe X:\CRUISES\RESILIENCE\data-processing\CTD\batch\btl.batch res020 X:\CRUISES\RESILIENCE\data-processing\CTD\  
+    End of the bottles .ros processing 
+!bzip2.exe -f X:\CRUISES\RESILIENCE\data-processing\CTD\data\codac\res020.cnv 
+'bzip2.exe' n'est pas reconnu en tant que commande interne 
+ou externe, un programme exécutable ou un fichier de commandes. 
+ 
+    End of the file compressing for Coriolis 
+    End of the file compressing for Coriolis 
+END OF CTD SBE PROCESSING 
+
+ LADCP PROCESSING 
+INITIALIZING LDEO LADCP PROCESSING 

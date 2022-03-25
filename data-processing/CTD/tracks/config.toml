@@ -1,0 +1,39 @@
+# this is a configuration file for cruiseTrack2kml program
+
+cruise = "PIRATA-FR32"
+ship = "THALASSA"
+size_plots = 700
+station_number = true
+file = "netcdf"
+time = 'TIME'
+latitude = 'LATITUDE'
+longitude = 'LONGITUDE'
+profile = 'PROFILE'
+
+# File is relative from Drive
+[ctd]
+file = '../netcdf/OS_PIRATA-FR32_CTD.nc'
+name = 'St'
+name_format = 5
+plots = "http://www.brest.ird.fr/us191/cruises/pirata-fr32/CTD/PIRATA-FR32-{:05d}_CTD.png"
+
+[xbt]
+#file = "none"
+file = '../../CELERITE/netcdf/OS_PIRATA-FR32_XBT.nc'
+name = 'Xbt'
+name_format = 5
+plots = "http://www.brest.ird.fr/us191/cruises/pirata-fr32/XBT/PIRATA-FR32-{:05d}_XBT.png"
+
+[tsg]
+file = "../../THERMO/netcdf/OS_PIRATA-FR32_TSG.nc"
+params = 'SSPS,SSTP'
+plots = "http://www.brest.ird.fr/us191/cruises/pirata-fr32/TSG/PIRATA-FR32_TSG_COLCOR_SCATTER.png"
+
+[tao]
+# https://www.pmel.noaa.gov/tao/drupal/pirata-display/gif/buoy_0n10w.gif
+
+[windows]
+drive = "m:"
+
+[unix]
+drive = "/m"
