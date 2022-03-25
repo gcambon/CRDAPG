@@ -1,0 +1,1 @@
+Put SEASOFT and LADCP in C:\
