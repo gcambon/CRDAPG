@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Filter >
-  <Version value="7.26.7.114" />
+  <Version value="7.26.7.129" />
   <ServerName value="Filter" />
-  <InputDir value="m:\PIRATA-FR29\data-processing\CTD\data\tmp" />
+  <InputDir value="c:\Cruises\RESILIENCE\data-processing\CTD\data\tmp" />
   <InputFileArray size="1" GrowBy="-1" >
-    <ArrayItem index="0" value="fr29001.cnv" />
+    <ArrayItem index="0" value="resi22st007.cnv" />
   </InputFileArray>
-  <OutputDir value="m:\PIRATA-FR29\data-processing\CTD\data\tmp" />
+  <OutputDir value="c:\Cruises\RESILIENCE\data-processing\CTD\data\tmp" />
   <NameAppend value="" />
-  <OutputFile value="fr29001.cnv" />
+  <OutputFile value="resi22st007.cnv" />
   <LastProcessed value="0" />
   <TimeConstFilterA value="0.030000" />
   <TimeConstFilterB value="0.150000" />
-  <CalcArray Size="13" >
+  <CalcArray Size="16" >
     <CalcArrayItem index="0" CalcID="65" >
       <Calc UnitID="3" Ordinal="0" >
         <FullName value="Pressure, Digiquartz [db]" />
@@ -82,9 +82,27 @@
         <FullName value="Fluorescence, WET Labs ECO-AFL/FL [mg/m^3]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="12" CalcID="24" >
-      <Calc UnitID="60" Ordinal="0" >
-        <FullName value="Fluorescence, Chelsea Aqua 3 Chl Con [ug/l]" />
+    <CalcArrayItem index="12" CalcID="59" >
+      <Calc UnitID="-1" Ordinal="0" >
+        <FullName value="PAR/Irradiance, Biospherical/Licor" />
+        <PAR_Units value="0" />
+      </Calc>
+    </CalcArrayItem>
+    <CalcArrayItem index="13" CalcID="77" >
+      <Calc UnitID="-1" Ordinal="0" >
+        <FullName value="SPAR, Biospherical/Licor" />
+        <SPAR_Units value="0" />
+      </Calc>
+    </CalcArrayItem>
+    <CalcArrayItem index="14" CalcID="14" >
+      <Calc UnitID="46" Ordinal="0" >
+        <FullName value="CPAR/Corrected Irradiance [%]" />
+        <DegreesFromVertical value="0.000000" />
+      </Calc>
+    </CalcArrayItem>
+    <CalcArrayItem index="15" CalcID="1" >
+      <Calc UnitID="29" Ordinal="0" >
+        <FullName value="Altimeter [m]" />
       </Calc>
     </CalcArrayItem>
   </CalcArray>
@@ -102,5 +120,8 @@
     <ArrayItem index="10" value="0" />
     <ArrayItem index="11" value="1" />
     <ArrayItem index="12" value="1" />
+    <ArrayItem index="13" value="1" />
+    <ArrayItem index="14" value="1" />
+    <ArrayItem index="15" value="1" />
   </FilterTypeArray>
 </Filter>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Sea_Plot >
-  <Version value="7.26.7.114" />
+  <Version value="7.26.7.129" />
   <ServerName value="Sea Plot" />
-  <InputDir value="M:\PIRATA-FR29\data-processing\CTD\data\cnv" />
+  <InputDir value="c:\Cruises\RESILIENCE\data-processing\CTD\data\cnv" />
   <InputFileArray size="1" GrowBy="-1" >
-    <ArrayItem index="0" value="dfr29005.cnv" />
+    <ArrayItem index="0" value="dresi22st007.cnv" />
   </InputFileArray>
   <OutputType value="2" high="3" low="0" initialValue="0" />
-  <OutputDir value="M:\PIRATA-FR29\data-processing\CTD\plots\TS" />
+  <OutputDir value="c:\Cruises\RESILIENCE\data-processing\CTD\plots\TS" />
   <NameAppend value="-ts" />
-  <OutputFile value="dfr29005.jpg" />
+  <OutputFile value="dresi22st007.jpg" />
   <LastProcessed value="0" />
   <PrintSetup >
     <Orientation value="2" high="2" low="0" initialValue="1" />
@@ -32,7 +32,7 @@
     <OutputHeight value="512" />
   </BitmapSetup>
   <PlotType value="4" high="5" low="0" initialValue="2" />
-  <Title value="PIRATA-FR31" />
+  <Title value="RESILIENCE" />
   <AddFileName value="1" />
   <TitleColor value="0" />
   <FontType value="Arial" />

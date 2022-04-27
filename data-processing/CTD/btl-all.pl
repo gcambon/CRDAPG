@@ -492,18 +492,18 @@ for ( my $i = 0 ; $i <= $#ARGV ; $i++ ) {
           $cycle_mesure, $PRFL, $type_odv,
           $iso_date . &UnixDate( $date, "%H:%M:%S" ),
           $long_pos, $lat_pos;
-        printf ODV_FILE ( $bottom_depth > 1e35 ) ? "\t" : "\t%6.1f",
-          $bottom_depth;
+        printf ODV_FILE ( $bottom_depth > 1e35 ) ? "\t" : ("\t%6.1f",
+          $bottom_depth);
         printf ODV_FILE "\t$format{'BOTL'}", $data{'BOTL'};
         printf ODV_FILE "\t$format{'PRES'}", $data{'PRES'};
-        printf ODV_FILE ( $data{'TE01'} > 1e35 ) ? "\t" : "\t$format{'TE01'}",
-          $data{'TE01'};
-        printf ODV_FILE ( $data{'TE02'} > 1e35 ) ? "\t" : "\t$format{'TE02'}",
-          $data{'TE02'};
-        printf ODV_FILE ( $data{'PSA1'} > 1e35 ) ? "\t" : "\t$format{'PSA1'}",
-          $data{'PSA1'};
-        printf ODV_FILE ( $data{'PSA2'} > 1e35 ) ? "\t" : "\t$format{'PSA2'}",
-          $data{'PSA2'};
+        printf ODV_FILE ( $data{'TE01'} > 1e35 ) ? "\t" : ("\t$format{'TE01'}",
+          $data{'TE01'});
+        printf ODV_FILE ( $data{'TE02'} > 1e35 ) ? "\t" : ("\t$format{'TE02'}",
+          $data{'TE02'});
+        printf ODV_FILE ( $data{'PSA1'} > 1e35 ) ? "\t" : ("\t$format{'PSA1'}",
+          $data{'PSA1'});
+        printf ODV_FILE ( $data{'PSA2'} > 1e35 ) ? "\t" : ("\t$format{'PSA2'}",
+          $data{'PSA2'});
         printf ODV_FILE "\t$format{'DO21'}", $data{'DO21'};
         printf ODV_FILE "\t$format{'DO22'}", $data{'DO22'};
         printf ODV_FILE "\t$format{'FLU2'}", $data{'FLU2'};

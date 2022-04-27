@@ -2,13 +2,13 @@
 <ASCII_Out >
   <Version value="7.26.7.129" />
   <ServerName value="ASCII Out" />
-  <InputDir value="M:\PIRATA-FR31\data-processing\CTD\data\cnv" />
+  <InputDir value="c:\Cruises\RESILIENCE\data-processing\CTD\data\cnv" />
   <InputFileArray size="1" GrowBy="-1" >
-    <ArrayItem index="0" value="dfr31063.cnv" />
+    <ArrayItem index="0" value="resi22st007.cnv" />
   </InputFileArray>
-  <OutputDir value="M:\PIRATA-FR31\data-processing\CTD\data\cnv" />
+  <OutputDir value="c:\Cruises\RESILIENCE\data-processing\CTD\data\asc" />
   <NameAppend value="" />
-  <OutputFile value="dfr31063" />
+  <OutputFile value="resi22st007" />
   <LastProcessed value="0" />
   <HeaderFile value="1" />
   <DataFile value="1" />
@@ -26,7 +26,7 @@
   <FirstColumnValue value="" />
   <ReplaceBadFlag value="1" />
   <BadFlagValue value="1000000000000000000000000000000000000.000000" />
-  <CalcArray Size="25" >
+  <CalcArray Size="28" >
     <CalcArrayItem index="0" CalcID="72" >
       <Calc UnitID="-1" Ordinal="0" >
         <FullName value="Scan Count" />
@@ -106,12 +106,30 @@
         <FullName value="Fluorescence, WET Labs ECO-AFL/FL [mg/m^3]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="14" CalcID="24" >
-      <Calc UnitID="60" Ordinal="0" >
-        <FullName value="Fluorescence, Chelsea Aqua 3 Chl Con [ug/l]" />
+    <CalcArrayItem index="14" CalcID="59" >
+      <Calc UnitID="-1" Ordinal="0" >
+        <FullName value="PAR/Irradiance, Biospherical/Licor" />
+        <PAR_Units value="0" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="15" CalcID="55" >
+    <CalcArrayItem index="15" CalcID="77" >
+      <Calc UnitID="-1" Ordinal="0" >
+        <FullName value="SPAR, Biospherical/Licor" />
+        <SPAR_Units value="0" />
+      </Calc>
+    </CalcArrayItem>
+    <CalcArrayItem index="16" CalcID="14" >
+      <Calc UnitID="46" Ordinal="0" >
+        <FullName value="CPAR/Corrected Irradiance [%]" />
+        <DegreesFromVertical value="0.000000" />
+      </Calc>
+    </CalcArrayItem>
+    <CalcArrayItem index="17" CalcID="1" >
+      <Calc UnitID="29" Ordinal="0" >
+        <FullName value="Altimeter [m]" />
+      </Calc>
+    </CalcArrayItem>
+    <CalcArrayItem index="18" CalcID="55" >
       <Calc UnitID="61" Ordinal="0" >
         <FullName value="Oxygen, SBE 43 [umol/kg]" />
         <WindowSize value="2.000000" />
@@ -119,7 +137,7 @@
         <ApplyTauCorrection value="0" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="16" CalcID="55" >
+    <CalcArrayItem index="19" CalcID="55" >
       <Calc UnitID="61" Ordinal="1" >
         <FullName value="Oxygen, SBE 43, 2 [umol/kg]" />
         <WindowSize value="2.000000" />
@@ -127,42 +145,42 @@
         <ApplyTauCorrection value="0" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="17" CalcID="70" >
+    <CalcArrayItem index="20" CalcID="70" >
       <Calc UnitID="49" Ordinal="0" >
         <FullName value="Salinity, Practical [PSU]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="18" CalcID="70" >
+    <CalcArrayItem index="21" CalcID="70" >
       <Calc UnitID="49" Ordinal="1" >
         <FullName value="Salinity, Practical, 2 [PSU]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="19" CalcID="15" >
+    <CalcArrayItem index="22" CalcID="15" >
       <Calc UnitID="53" Ordinal="0" >
         <FullName value="Density [sigma-theta, kg/m^3]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="20" CalcID="15" >
+    <CalcArrayItem index="23" CalcID="15" >
       <Calc UnitID="53" Ordinal="1" >
         <FullName value="Density, 2 [sigma-theta, kg/m^3]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="21" CalcID="74" >
+    <CalcArrayItem index="24" CalcID="74" >
       <Calc UnitID="33" Ordinal="0" >
         <FullName value="Sound Velocity [Chen-Millero, m/s]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="22" CalcID="74" >
+    <CalcArrayItem index="25" CalcID="74" >
       <Calc UnitID="33" Ordinal="1" >
         <FullName value="Sound Velocity, 2 [Chen-Millero, m/s]" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="23" CalcID="73" >
+    <CalcArrayItem index="26" CalcID="73" >
       <Calc UnitID="-1" Ordinal="0" >
         <FullName value="Scans Per Bin" />
       </Calc>
     </CalcArrayItem>
-    <CalcArrayItem index="24" CalcID="20" >
+    <CalcArrayItem index="27" CalcID="20" >
       <Calc UnitID="-1" Ordinal="0" >
         <FullName value="Flag" />
       </Calc>
@@ -194,5 +212,8 @@
     <ArrayItem index="22" value="1" />
     <ArrayItem index="23" value="1" />
     <ArrayItem index="24" value="1" />
+    <ArrayItem index="25" value="1" />
+    <ArrayItem index="26" value="1" />
+    <ArrayItem index="27" value="1" />
   </SelectArray>
 </ASCII_Out>

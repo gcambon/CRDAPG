@@ -1354,8 +1354,7 @@ for ( my $i = 0 ; $i <= $#ARGV ; $i++ ) {
 
           # give warning Redundant argument in printf under perl 6.22.x
           printf ODV_FILE ( $bottom_depth > 1e35 )
-            ? ( "%c", $dummy )
-            : ( "\t%6.1f", $bottom_depth );
+            ? ( "\t") : ( "\t%6.1f", $bottom_depth );
 
           # printf ODV_FILE ($data{$key} > 1e35 || $data{$key} == -9.99e-29) ?
           #  {"%c", $dummy} : "\t$format{$key}", $data{$key};
