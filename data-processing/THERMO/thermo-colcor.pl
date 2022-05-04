@@ -390,7 +390,7 @@ foreach my $file (@ARGV) {
   open( DATA_FILE, $file ) or warn( "Erreur: " . $! );
   print STDERR "Lit: $file\n" if defined $echo;
   while (<DATA_FILE>) {
-    if (/^\$PIFM,TSCOR/) {
+    if (/^\$PIFM,MDCOR/) {
       (
         undef,    undef,   $date,     $heure,    $lat_s, $lat_deg,
         $lat_min, $long_s, $long_deg, $long_min, undef,  undef,
