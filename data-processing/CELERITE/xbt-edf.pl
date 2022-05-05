@@ -398,7 +398,8 @@ foreach my $cle (sort { $a <=> $b } keys %file) {
   open( DATA_FILE, $file{$cle} ) or warn("Erreur: " . $!);
   print STDERR  "\nLit: $file{$cle}" if defined $echo;
   while( <DATA_FILE> ){           # header contient l'entete
-    ($profil) = $1 if (/Sequence Number\s+:\s+(\d+)/);
+    #($profil) = $1 if (/Sequence Number\s+:\s+(\d+)/);
+	$profil = $cle;
     if( /Probe Type\s+:\s+(.*)/)	{
       ($probe) = $1;
       chop $probe;
@@ -427,18 +428,18 @@ foreach my $cle (sort { $a <=> $b } keys %file) {
     if (m[//\s+Data\r]) {  
       printf XML_FILE "%3d  %4d %7.3f %7.4f %8.4f %s\n",$profil, $code,$julien,
           $lat_pos, $long_pos,&dateFormat($date_EN) if (defined $xml);
-      printf ASCII_FILE "%3d  %4d %7.3f %7.4f %8.4f %s\n",$profil, $code,$julien,
+      printf ASCII_FILE "%03d  %4d %7.3f %7.4f %8.4f %s\n",$profil, $code,$julien,
           $lat_pos, $long_pos,&dateFormat($date_EN) if (defined $ascii);
     }
     # lit les donnees et eclate la ligne, utilise la ligne courante $_ par defaut
     if (/^\d/) {
       if ($probe =~ /XCTD/) {	    
-        ($depth,$T,$C,$S,$sndvel,$sigmateta) = split;
+        (undef,undef,$depth,$T,$C,$S,$sndvel,$sigmateta) = split;
       }	
       else {	      
         (undef,undef,$depth,$T,$sndvel) = split;
         $S = 35; 
-	# routine de calcul des parametres derives si necessaire, module seawater
+        # routine de calcul des parametres derives si necessaire, module seawater
         #$T68 = $T0 * 1.00024; 
         #$sndvel=&sw_svel($S,$T,$depth);
         $sigmateta = &sw_sigmateta($S,$T,$depth);
@@ -447,15 +448,15 @@ foreach my $cle (sort { $a <=> $b } keys %file) {
       if ($T > 1.0) {
 	$dpth = $depth;  # memorise la profondeur max pour l'entete
 	if (defined $xml) { 
-          printf XML_FILE "%3d  %6.1f  %5.2f  %5.4g  %6.5g  %7.6g\n",
+          printf XML_FILE "%03d  %6.1f  %5.2f  %5.4g  %6.5g  %7.6g\n",
 	      $profil, $depth, $T, $S, $sigmateta, $sndvel if (defined $xml);
         }
 	if (defined $ascii) { 
-      	  printf ASCII_FILE "%3d  %6.1f  %5.2f  %5.4g  %6.5g  %7.6g\n",
+      	  printf ASCII_FILE "%03d  %6.1f  %5.2f  %5.4g  %6.5g  %7.6g\n",
 	      $profil, $depth, $T, $S, $sigmateta, $sndvel if (defined $ascii);
         }
         if (defined $odv) {
-          printf ODV_FILE "%s\t%3d\t%s\t%s\t%8.4f\t%7.4f\t%6.1f\t%6.1f",
+          printf ODV_FILE "%s\t%03d\t%s\t%s\t%8.4f\t%7.4f\t%6.1f\t%6.1f",
             $cycle_mesure, $profil, $type_odv, &dateFormat($date_EN,"%Y-%m-%dT%H:%M:%S"),
             $long_pos, $lat_pos, $bottom_depth, $depth;
 	  printf ODV_FILE ($T > 1e35) ? "\t" : "\t%5.2f", $T;
