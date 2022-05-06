@@ -21,16 +21,16 @@ fi
 # check alias for debug
 #alias
 
-  echo ""
-  echo "CTD processing:"
-  echo "---------------"
-  CTD
-  ctd
-  ctdnc
-  ctdall
-  ctdallnc
-  btl
-  btlnc
+  # echo ""
+  # echo "CTD processing:"
+  # echo "---------------"
+  # CTD
+  # ctd
+  # ctdnc
+  # ctdall
+  # ctdallnc
+  # btl
+  # btlnc
 
   echo ""
   echo "TSG processing:"
@@ -47,22 +47,22 @@ fi
   xbt
   xbtnc
 
-  echo ""
-  echo "LADCP processing:"
-  echo "-----------------"
-  LADCP
-  ladcp
-  ladcpnc
+  # echo ""
+  # echo "LADCP processing:"
+  # echo "-----------------"
+  # LADCP
+  # ladcp
+  # ladcpnc
 
-  echo ""
-  echo "CASINO processing:"
-  echo "------------------"
-  CASINO
-  casino
-  casinonc
-  casinosndnc
-  casinotsgnc
-  casinofboxnc
+  # echo ""
+  # echo "CASINO processing:"
+  # echo "------------------"
+  # CASINO
+  # casino
+  # casinonc
+  # casinosndnc
+  # casinotsgnc
+  # casinofboxnc
   
   # plot profiles and sections
   echo ""
