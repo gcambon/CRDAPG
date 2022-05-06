@@ -1,4 +1,4 @@
-#!/home/gcambon/miniconda3/bin/python
+#!/home/cambon/miniconda3/bin/python
 """
 This class allows you to plot any type of data from an OceanSites
 files, either CTD, XBT or LADCP (profiles and sections)

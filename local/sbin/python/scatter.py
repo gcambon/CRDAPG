@@ -1,4 +1,4 @@
-#!/home/gcambon/miniconda3/bin/python
+#!/home/cambon/miniconda3/bin/python
 from netCDF4 import Dataset
 from os.path import expanduser
 import numpy as np
@@ -25,24 +25,40 @@ LATITUDE = nc.variables['LATITUDE']
 LONGITUDE = nc.variables['LONGITUDE']
 CM = nc.cycle_mesure
 
+########################################
+# parameters
+## bounding
+latmin = -30.7
+latmax = -29.4
+#
+lonmin = 30.4
+lonmax = 31.8
+
+##caxis
+vmin_salt = 35.2
+vmax_salt = 35.6
+vmin_temp = 23
+vmax_temp = 26
+#########################################
+
 fig = plt.figure(figsize=(6, 12))
 gs = gridspec.GridSpec(2,1)
 ax1 = plt.subplot(gs[0], projection=ccrs.Mercator())
-ax1.set_extent([-40, 20, -30, 50], crs=ccrs.PlateCarree())
+ax1.set_extent([lonmin, lonmax, latmin, latmax], crs=ccrs.PlateCarree())
 ax1.coastlines(resolution='auto', color='k')
 ax1.gridlines(color='lightgrey', linestyle='-', draw_labels=True)
 
-im1 = ax1.scatter(LONGITUDE[:], LATITUDE[:], c=SSPS[:], s=30, cmap='jet', vmin=32, vmax=37, transform=ccrs.PlateCarree())
+im1 = ax1.scatter(LONGITUDE[:], LATITUDE[:], c=SSPS[:], s=30, cmap='jet', vmin=vmin_salt, vmax=vmax_salt, transform=ccrs.PlateCarree())
 fig.colorbar(im1, ax=ax1, orientation='vertical', pad=0.15)
 ax1.set(xlabel='{} '.format(LONGITUDE.standard_name), ylabel='{} '.format(LATITUDE.standard_name),
         title='{} - {}'.format(CM, SSPS.long_name))
 
 ax2 = plt.subplot(gs[1], projection=ccrs.Mercator())
-ax2.set_extent([-40, 20, -30, 50], crs=ccrs.PlateCarree())
+ax2.set_extent([lonmin, lonmax, latmin, latmax], crs=ccrs.PlateCarree())
 ax2.coastlines(resolution='auto', color='k')
 ax2.gridlines(color='lightgrey', linestyle='-', draw_labels=True)
 
-im2 = ax2.scatter(LONGITUDE[:], LATITUDE[:], c=SSTP[:], s=30, cmap='jet', vmin=21, vmax=32, transform=ccrs.PlateCarree())
+im2 = ax2.scatter(LONGITUDE[:], LATITUDE[:], c=SSTP[:], s=30, cmap='jet', vmin=vmin_temp, vmax=vmax_temp, transform=ccrs.PlateCarree())
 fig.colorbar(im2, ax=ax2, orientation='vertical', pad=0.15)
 ax2.set(xlabel='{} '.format(LONGITUDE.standard_name), ylabel='{} '.format(LATITUDE.standard_name),
         title='{} - {}'.format(CM, SSTP.long_name))
