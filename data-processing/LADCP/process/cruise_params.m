@@ -66,6 +66,7 @@ p.wlim                       = 0.20;
 % 4 (maximum tilt difference between pings allowed)]
 % WH systems have reported decent profiles with up to 35 deg tilt ...
 p.tiltmax                    = [20 4];
+%%p.tiltmax                    = [30 8];
 
 %% REFERENCE LAYER & PRESSURE SENSOR
 % Give bin number for the best W to compute depth of the ADCP

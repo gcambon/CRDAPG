@@ -302,21 +302,26 @@ LINE:
     next LINE if $. == 1;    # saute la premiere ligne d'entete
     next LINE if $_ eq "\n";   # saute les lignes vides
     #print "Ligne: $_\n";
-    ($date,$heure,$lat_dec,$long_dec,undef,undef,$code,undef,undef,undef,  #10
-    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,   #20
-    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,   #30
-    undef,undef,undef,undef,undef,$sonde_18,undef,undef,undef,undef,   #40
+    ($date,$heure,undef,undef,undef,undef,$code,undef,undef,undef,  #10
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,$SSPS_45,   #20
+    undef,undef,$DOX2,undef,undef,undef,undef,undef,undef,undef,   #30
+    undef,undef,undef,$fbox_QC,undef,undef,undef,undef,undef,undef,   #40
     undef,undef,undef,undef,undef,$sonde_ref,undef,undef,undef,undef,   #50
-    undef,undef,undef,undef,undef,undef,undef,$tair,$tmer,$hum,    #60
-    $patm,$rad,undef,undef,undef,$vit,$dir,undef,undef,undef,      #70
-    undef,undef,undef,undef,undef,undef,undef,$phinsb,undef,undef, #80
-    undef,undef,undef,$phinst,undef,undef,undef,undef,undef,undef, #90
-    undef,undef,undef,undef,$SSTP,$SSJT,$CNDC,$SSPS,undef,undef,   #100
-    undef,undef,undef,undef,undef,undef,$sog,$cog,$speed,$heading, #110
-    $speed_drift,$heading_drift,undef,undef,undef,undef,undef,undef,$fbox_QC,undef,   #120
-    undef,undef,$SSPS_45,undef,$DOX2,undef,undef,$TUR4,$Greenalgea,$BlueAlgae,  #130
-    $Diatoms,$Cryptophyta,$YellowSub,undef,$CPHL,$PHPH)
-         = split(/\t/);
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,    #60
+    undef,undef,$sonde_18,undef,undef,undef,undef,$SSTP,$SSJT,$CNDC,      #70
+    $SSPS,,undef,undef,undef,undef,undef,undef,undef,undef,undef, #80
+    undef,undef,undef,undef,undef,undef,undef,undef,$tair,$tmer,  #90
+    $hum,$patm,undef,undef,undef,undef,$vit,$dir,undef,undef,   #100
+    undef,undef,$phinsb,undef,undef,undef,undef,undef,undef,$phinst, #110
+   ,undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,   #120
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,  #130
+    undef,undef,undef,$CPHL,$PHPH, undef,undef,undef,$lat_dec,$long_dec,  #140
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
+    undef,undef,undef,undef,$sog,$cog,$speed,$heading,$speed_drift,$heading_drift # 190 
+    ) = split(/\t/);
     #next LINE if $mode !~ /GPS/;  # si pas GPS on saute la ligne
 				    # car donnees a zero
     next LINE if $code !~ /ACQAUTO/;  # si pas GPS on saute la ligne
@@ -420,23 +425,25 @@ LINE:
     # replace $lat_dec,$long_dec in split by $lat,$long
     # signe ° => \xB0
     #
+
 =pod
-    if( $lat =~ /(\w)\s*(\d+)\xB0\s*(\d+)'\s*(\d+[,.]?\d+)''/ ) {
-      ($lat_s,$lat_deg,$lat_min,$lat_sec) = ($1,$2,$3,$4);
+    if( $lat =~ /(\w)\s*(\d+)\xB0\s*(\d+[,.]?\d+)'/ ) {
+      ($lat_s,$lat_deg,$lat_min) = ($1,$2,$3);
        $lat_sec =~ s/\,/\./mg; 
-       $lat_dec  = &position($lat_deg,$lat_min,$lat_sec,$lat_s);
+       $lat_dec  = &position($lat_deg,$lat_min,$lat_s);
     } else {
        $lat =~ s/\,/\./mg; 
        $lat_dec = $lat;
     }
-    if( $long =~ /(\w)\s*(\d+)\xB0\s*(\d+)'\s*(\d+[,.]?\d+)''/ ) {
-      ($long_s,$long_deg,$long_min,$long_sec) = ($1,$2,$3,$4);
+    if( $long =~ /(\w)\s*(\d+)\xB0\s*(\d+[,.]?\d+)'/ ) {
+      ($long_s,$long_deg,$long_min) = ($1,$2,$3);
        $long_sec =~ s/\,/\./mg; 
-       $long_dec = &position($long_deg,$long_min,$long_sec,$long_s);
+       $long_dec = &position($long_deg,$long_min,$long_s);
     } else {
        $long =~ s/\,/\./mg; 
        $long_dec = $long;
     }
+
 =cut
     # end comment for decimal position
     #
