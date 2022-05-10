@@ -87,13 +87,13 @@ alias ctdallpy='oceano.py data/cnv/resi22st0*.cnv -c ../config.toml -i CTD -k PR
 # bouteilles
 alias btl='perl btl-all.pl --echo --dtd=local data/btl/"$CRUISEidlc"*.btl'
 alias btlnc='$OCEANO2OCEANSITES_PL --echo  --short --nodtd ascii/"$CRUISElc"-all_btl.xml --output=netcdf/OS_"${CRUISE}"-ALL_BTL.nc'
-alias btlpy='oceano.py data/btl/resi22st*.btl -c ../config.toml -i BTL -k BOTL PRES DEPTH ETDD TE01 TE02 PSA1 PSA2 DO11 DO21 DO12 DO22 FLU2 TUR3 LGH5'
+alias btlpy='oceano.py data/btl/resi22st*.btl -c ../config.toml -i BTL -k BOTL PRES DEPTH TE01 TE02 PSA1 PSA2 DO11 DO21 DO12 DO22 FLU2 TUR3 LGH5'
 
 
 # XBT (CELERITE)
 alias xbt='perl xbt-edf.pl --echo --dtd=local data/*.edf --all'
 alias xbtnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_xbt.xml --output=netcdf/OS_"${CRUISE}"_XBT.nc'
-alias xbtpy='oceano.py data/XBT*.edf -c ../config.toml -i XBT -k DEPTH TEMP SVEL'
+alias xbtpy='oceano.py data/T[5-7]_*.edf -c ../config.toml -i XBT -k DEPTH TEMP SVEL'
 
 # LADCP
 alias ladcp='perl ldeo-ladcp.pl --echo --dtd=local profiles/"$CRUISEidlc"*.lad --ascii --xml'
