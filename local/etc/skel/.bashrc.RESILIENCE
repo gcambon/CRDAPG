@@ -79,26 +79,32 @@ alias vislog='gvim ${DRIVE}/${CRUISE}/local/logs/synchro.log'
 alias ctd='perl ctd-all.pl data/asc/"$CRUISEidlc"0??.hdr --echo --dtd=local --top --all'
 alias ctdnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_ctd.xml --output=netcdf/OS_"${CRUISE}"_CTD.nc'
 # CTD  avec tous les capteurs primaires et secondaires
-alias ctdall='perl ctd-all.pl data/asc/"$CRUISEidlc"0??.hdr --echo --dtd=local --xml --ctd_all'
+alias ctdallpl='perl ctd-all.pl data/asc/"$CRUISEidlc"0??.hdr --echo --dtd=local --xml --ctd_all'
 alias ctdallnc='$OCEANO2OCEANSITES_PL --echo --nodtd --short ascii/"$CRUISElc"-all_ctd.xml --output=netcdf/OS_"${CRUISE}"-ALL_CTD.nc'
-
+alias ctdpy='oceano.py data/cnv/resi22st0*.cnv -c ../config.toml -i CTD -k PRES DEPTH ETDD TEMP PSAL DENS SVEL DOX2 FLU2 TUR3 LGH5'
+alias ctdallpy='oceano.py data/cnv/resi22st0*.cnv -c ../config.toml -i CTD -k PRES DEPTH ETDD TE01 TE02 CND1 CND2 PSA1 PSA2 DEN1 DEN2 SVEL DO12 DO22 FLU2 TUR3 LGH5'
 
 # bouteilles
 alias btl='perl btl-all.pl --echo --dtd=local data/btl/"$CRUISEidlc"*.btl'
 alias btlnc='$OCEANO2OCEANSITES_PL --echo  --short --nodtd ascii/"$CRUISElc"-all_btl.xml --output=netcdf/OS_"${CRUISE}"-ALL_BTL.nc'
+alias btlpy='oceano.py data/btl/resi22st*.btl -c ../config.toml -i BTL -k BOTL PRES DEPTH ETDD TE01 TE02 PSA1 PSA2 DO11 DO21 DO12 DO22 FLU2 TUR3 LGH5'
+
 
 # XBT (CELERITE)
 alias xbt='perl xbt-edf.pl --echo --dtd=local data/*.edf --all'
 alias xbtnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_xbt.xml --output=netcdf/OS_"${CRUISE}"_XBT.nc'
+alias xbtpy='oceano.py data/XBT*.edf -c ../config.toml -i XBT -k DEPTH TEMP SVEL'
 
 # LADCP
 alias ladcp='perl ldeo-ladcp.pl --echo --dtd=local profiles/"$CRUISEidlc"*.lad --ascii --xml'
 alias ladcpnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_adcp.xml --output=netcdf/OS_"${CRUISE}"_ADCP.nc'
+alias ladcppy='oceano.py profiles/*.lad -c ../config.toml -i LADCP -k DEPTH EWCT NSCT'
 
 # THERMO et BATOS (sans le VENT) extrait des fichiers temps reels Colcor
 alias tsg='perl thermo-colcor.pl --echo --local --all data/*.COLCOR'
 alias ctd-tsg='perl ctd-tsg-spl.pl ../CTD/data/asc/"$CRUISEidlc"???.hdr --echo'
 alias tsgnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd ascii/"$CRUISElc"_tsg.xml --output=netcdf/OS_${CRUISE}_TSG.nc'
+alias tsgpy='oceano.py data/*.COLCOR -c ../config.toml -i TSG -k SSJT SSTP SSPS'
 
 # CASINO extrait les donnees TSG et METEO des fichiers csv 
 alias casino='perl casino.pl --echo --local data/*.csv --all'
@@ -106,6 +112,7 @@ alias casinonc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=traject
 alias casinosndnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_snd --output=netcdf/OS_"${CRUISE}"_SND.nc'
 alias casinotsgnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_tsg --output=netcdf/OS_"${CRUISE}"_TSG.nc'
 alias casinofboxnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_fbox --output=netcdf/OS_"${CRUISE}"_FBOX.nc'
+alias casinopy='oceano.py data/*.csv -c ../config.toml  -i CASINO -k LATITUDE LONGITUDE BATH SSJT SSTP SSPS'
 
 # gestion HTML des images DD
 alias msgcol='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/MSGCOL -t "${CRUISE} - Meteosat couleur" -n 1'

@@ -1,39 +1,272 @@
-# this is a configuration file for cruiseTrack2kml program
+[global]
+author         = "proussel-jgrelet IRD mai 2022 RESILIENCE cruise"
+debug          = false
+echo           = true
+codeRoscop     = 'code_roscop.csv'
+ASCII          = "ascii"
+NETCDF         = "netcdf"
+odv            = "odv"
+title			= ''
+history		= ''
+institution = 'IRD'
+source = ''
+comment = ''
+references = ''
 
-cruise = "RESILIENCE"
-ship = "MARION-DUFRESNE"
-sizePlots = 700
-stationNumber = true
+[cruise]
+CYCLEMESURE    = "RESILIENCE"
+PLATEFORME     = "MARION-DUFRESNE"
+callsign       = "FNIN"
+INSTITUTE      = "IRD"
+TIMEZONE       = "GMT"
+BEGINDATE      = "19/04/2022"
+ENDDATE        = "24/05/2022"
+PI             = "TERNON"
+CREATOR        = "Jacques.Grelet@ird.fr"
 
 [ctd]
-File = "/RESILIENCE/data-processing/CTD/ascii/resilience.ctd"
-Prefix = 3
-Skip = 1
-Split = "PRFL,1,int,BEGIN_DATE,2,string,BEGIN_TIME,3,string,END_DATE,4,string,END_TIME,5,string,LAT,6,string,LAT_S,7,string,LON,8,string,LON_S,9,string,PMAX,10,float64,BOTTOM_DEPTH,11,float64"
-Plots = "http://www.brest.ird.fr/us191/cruises/resilience/CTD/dres%s.jpg"
+station        = 'resi22st(\d{3})'
+titleSummary   = "CTD profiles processed during RESILIENCE cruise"
+typeInstrument   = "SBE911+"
+instrumentNumber  = "09P1263"
+dateTimeFormat = "%d/%b/%Y %H:%M:%S"
+julianOrigin = 1
+
+	[ctd.header]
+	isHeader = '^[*#]+\s+'
+	endHeader = '^[*]END[*]'
+	#station = 'Station\s*:\s*\D*(\d*)'
+	DATETIME = 'System UpLoad Time\s*=\s*(\w+)\s+(\d+)\s+(\d+)\s+(\d+):(\d+):(\d+)'
+	LATITUDE = 'NMEA\s+Latitude\s*[:=]\s*(\d+)\s+(\d+\.\d+)\s+(\w)'
+	LONGITUDE = 'NMEA\s+Longitude\s*[:=]\s*(\d+)\s+(\d+.\d+)\s+(\w)'
+	DATE = 'Date\s*:\s*(\d+)/(\d+)/(\d+)'
+	TIME = '[Heure|Hour]\s*:\s*(\d+)[:hH](\d+):(\d+)'
+	BATH = 'Bottom Depth\s*:\s*(\d*\.?\d+?)\s*\S*'
+	operator = 'Operator\s*:\s*(.*)'
+	type = 'Type\s*:\s*(.*)'
+
+    # column start at 0
+	[ctd.split]
+	#SCAN = 0
+	ETDD = 1
+	PRES = 2
+	DEPTH = 3
+	TEMP = 4
+	PSAL = 20
+	DENS = 22
+	SVEL = 24
+	DOX2 = 18
+	FLU2 = 13
+	TUR3 = 12
+	LGHT = 14
+	LGH4 = 15
+	LGH5 = 16
+	NAVG = 23
+
+	[ctdAll.split]
+	ETDD = 1
+	PRES = 2
+	DEPTH = 3
+	TE01 = 4
+	TE02 = 5
+	CND1 = 6
+	CND2 = 7
+	DOV1 = 8
+	DOV2 = 9
+	DVT1 = 10
+	DVT2 = 11
+	FLU2 = 13
+	TUR3 = 12
+	DO12 = 18
+	DO22 = 19
+	PSA1 = 20
+	PSA2 = 21
+	DEN1 = 22
+	DEN2 = 23
+	SVEL = 24
+	NAVG = 26
+
+
+[btl]
+station        = 'resi22st(\d{3})'
+typeInstrument           = "SBE32 standard 24 Niskin bottles"
+instrumentNumber         = "unknown"
+titleSummary   = "Water sample during RESILIENCE cruise with 22 levels"
+comment        = "CTD bottles water sampling with temperature, salinity and oxygen from primary and secondary sensors"
+dateTimeFormat = "%d/%b/%Y %H:%M:%S"
+julianOrigin = 1
+skipLineWith = "(sdev)"
+
+	[btl.header]
+	endHeader = '^\s+Position\s+Time\s+$'
+	#station = 'Station\s*:\s*\D*(\d*)'
+	DATETIME = 'System UpLoad Time\s*=\s*(\w+)\s+(\d+)\s+(\d+)\s+(\d+):(\d+):(\d+)'
+	LATITUDE = 'NMEA\s+Latitude\s*[:=]\s*(\d+)\s+(\d+\.\d+)\s+(\w)'
+	LONGITUDE = 'NMEA\s+Longitude\s*[:=]\s*(\d+)\s+(\d+.\d+)\s+(\w)'
+	DATE = 'Date\s*:\s*(\d+)/(\d+)/(\d+)'
+	TIME = '[Heure|Hour]\s*:\s*(\d+)[:hH](\d+):(\d+)'
+	BATH = 'Bottom Depth\s*:\s*(\d*\.?\d+?)\s*\S*'
+	operator = 'Operator\s*:\s*(.*)'
+	type = 'Type\s*:\s*(.*)'
+
+	[btl.split]
+	BOTL = 0
+	PSA1 = 4
+	PSA2 = 5
+	DO11 = 6
+	DO12 = 7
+	DO21 = 8
+	DO22 = 9
+	Potemp090C = 10
+	Potemp190C = 11
+	ETDD = 12
+	PRES = 13
+	DEPTH = 14
+	TE01 = 15
+	TE02 = 16
+	CND1 = 17
+	CND2 = 18
+	DOV1 = 19
+	DOV2 = 20
+	DVT1 = 21
+	DVT2 = 22
+	TUR3 = 23
+	FLU2 = 24
+	LGHT = 25
+	LGH4 = 26
+	LGH5 = 27
+
+
+
+[sbe35]
+typeInstrument           = "SBE35 high precision realtime thermometer"
+instrumentNumber         = 102
+
+
+    [sbe35.header]
+	endHeader = '^dd\d+,\d+$'
+	#station = '^[*]\s+FileName\s+=\s+(.*)$'
+        station = '^[*]+\s+Station:(\d+)$'
+
+	[sb35.split]
+	BOTL = 0
+	TE35 = 16
 
 [xbt]
-File = "/RESILIENCE/data-processing/CELERITE/ascii/resilience.xbt"
-Prefix = 3
-Skip = 2
-Split = "PRFL,1,int,BEGIN_DATE,2,string,BEGIN_TIME,3,string,LAT,4,string,LAT_S,5,string,LON,6,string,LON_S,7,string,PMAX,8,float64,PROBE,9,string"
-Plots = "http://www.brest.ird.fr/us191/cruises/pirata-fr32/XBT/RESILIENCE-%s_XBT.png"
+station = '[TC]\d+_(\d{5})'
+typeInstrument   = "SIPPICAN+"
+instrumentNumber  = "N/A"
+acquisitionSoftware = "WinMK21"
+acquisitionVersion = "2.10.1" 
+processingSoftware = ""
+processingVersion = ""
+dateTimeFormat = "%d/%m/%Y %H:%M:%S"
+type           = "SIPPICAN"
+sn             = "01150"
+title_summary  = "XBT profiles processed during RESILIENCE cruise"
+comment        = "Extract from .edf files"
+
+	[xbt.header]
+        endHeader = '^//\s*Data$'
+	#endHeader = '^Depth\s*\(m\)'
+	#station = 'Sequence\s*Number\s*:\s*(\d*)'
+	#station = 'Sequence\s*#\s*:\s*(\d*)'
+	TIME = 'Time of Launch\s*[:=]\s*(\d+):(\d+):(\d+)'
+	DATE = 'Date of Launch\s*[:=]\s*(\d+)/(\d+)/(\d+)'
+	DATETIME = 'System UpLoad Time\s*=\s*(\w+)\s+(\d+)\s+(\d+)\s+(\d+):(\d+):(\d+)'
+	LATITUDE = 'Latitude\s*[:=]\s*(\d+)\s+(\d+\.\d+)(\w)'
+	LONGITUDE = 'Longitude\s*[:=]\s*(\d+)\s+(\d+.\d+)(\w)'
+
+	[xbt.split]
+	DEPTH = 2
+	TEMP = 3
+	SVEL = 4	
+	PSAL = 6
+	DENS = 8
+
+
+[ladcp]
+station        = 'resi22st(\d{3})'
+typeInstrument   = "LADCP WH150/WH150"
+instrumentNumber  = "24543/24085"
+acquisitionSoftware = "BBTALK"
+acquisitionVersion = 3.04
+processingSoftware = "MATLAB-VISBECK"
+processingVersion = "10.16.2"
+title_summary  = "IFM-GEOMAR/LDEO Matlab LADCP-Processing system adapted by FM/PR/JG"
+comment        = "Extract from .lad files"
+
+	[ladcp.header]
+	station = '[fF][rR]32(\d*)'
+	endHeader = 'Columns'
+	DATE = 'Date\s*=\s*(\d+)/(\d+)/(\d+)'
+	TIME = 'Start_Time\s*=\s*(\d+)[:hH](\d+):(\d+)'
+	LATITUDE = 'Latitude\s*[:=]\s*([-+]?\d+\.\d+)'
+	LONGITUDE = 'Longitude\s*[:=]\s*([-]?\d+.\d+)'
+
+	[ladcp.split]
+	DEPTH = 0
+	EWCT = 1
+	NSCT = 2
 
 [tsg]
-#File = "none"
-File = "/RESILIENCE/data-processing/THERMO/ascii/resilience_tsg"
-Skip = 2
-Split = "LATITUDE,3,float64,LONGITUDE,4,float64"
-Plots = "http://www.brest.ird.fr/us191/cruises/resilience/TSG/RESILIENCE_TSG_COLCOR_SCATTER.png"
+separator = ","
+typeInstrument   = "SBE21"
+instrumentNumber  = "3199"
+acquisitionSoftware = "COLCOR"
+acquisitionVersion = ""
+processingSoftware = ""
+processingVersion = ""
+calDate        = "14/01/2019" 
+externalType   = "SBE3S"
+externalSn     = 4074
+externalCalDate = "16/01/2018"
+depth_intake   = 4
+title_summary  = "Thermosalinograph data acquired with Seabird SBE21 instrument and reduce with THECSAS/COLCOR"
+comment        = "Extract from .colcor files"
 
-[windows]
-# run on cmd:
-# %GOBIN%/cruiseTrack2kml.exe
-Drive = "m:"
+	[tsg.header]
+	isHeader = '^#'
+	isData = 'PIFM,MDCOR'
 
-[unix]
-# run on Linux or Mingw
-# $GOBIN/cruiseTrack2kml.exe
-Drive = "/m"
-# With Docker
-#Drive = "/data"
+	[tsg.format]
+	TIME = '(\d+):(\d+):(\d+)'
+	DATE = '(\d+)/(\d+)/(\d+)'
+	LATITUDE = '([NS]),(\d+),(\d+\.\d+)'
+	LONGITUDE = '([EW]),(\d+),(\d+\.\d+)'
+
+	[tsg.split]
+	SSJT = 18
+	SSTP = 19
+	SSPS = 21
+	
+[casino]
+separator = "	"
+acquisitionSoftware = "CASINO"
+acquisitionVersion = ""
+processingSoftware = ""
+processingVersion = ""
+title_summary  = "Raw data extract from CASINO software, sample interval 30 secondes"
+comment        = "Extract from .csv files"
+
+	[casino.header]
+	isHeader = '^#'
+	isData = 'ACQAUTO'
+
+	[casino.format]
+	TIME = '(\d+):(\d+):(\d+)'
+	DATE = '(\d+)/(\d+)/(\d+)'
+
+       	[casino.split]
+	LATITUDE = 2
+	LONGITUDE = 3
+	BATH = 35
+	SSTP = 94
+	SSJT = 95
+	SSPS = 96
+	WMSP = 65
+	WDIR = 64
+	DRYT = 66
+	RELH = 68
+	
+

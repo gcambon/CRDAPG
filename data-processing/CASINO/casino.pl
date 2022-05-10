@@ -85,13 +85,13 @@ my ($julien, $lat_s,$lat_deg, $lat_min, $lat_sec, $lat_dec);
 my ($long_s,$long_deg, $long_min, $long_sec, $long_dec);
 my ($day,$month,$year,$hour,$min,$sec);
 my ($time, $ecart);
-my ($date,$heure,$code,$lat,$long,$sonde_18,$sonde_ref,$tair,$tmer,$hum,$patm,$rad,
+my ($date,$heure,$code,$lat,$long,$sonde_ref,$tair,$tmer,$hum,$patm,$rad,
     $vit,$dir,$CNDC,$SSTP,$SSPS,$SSJT);
 # thalassa FR29
-my ($phinsb,$phinst,$speed,$heading,$DOX2);
+my ($phinsb,$phinsa,$speed,$heading,$DOX2);
 my ($sog, $cog,$speed_drift,$heading_drift);
 # FerryBox
-my ($fbox_QC,$SSPS_45,$TUR4,$Greenalgea,$BlueAlgae,$Diatoms,$Cryptophyta,$YellowSub,$CPHL,$PHPH);
+my ($fbox_QC,$SSPS_45,$FLU2,$cdom,$scatter,$fb_flow);
 
 #------------------------------------------------------------------------------
 # version()
@@ -277,10 +277,10 @@ print SSTD_FILE "YEAR    DAYD      LATX      LONX    SSJT   SSPS   CNDC   SSTP\n
 print SND_FILE  "   Date     Time      Latitude     Longitude    BATH      SOG    COG  SPEED   HEADING  SPEED_DRIFT HEADING_DRIFT PHINSB   PHINST\n";
 print SNDD_FILE "YEAR    DAYD      LATX      LONX   BATH      SOG    COG  SPEED   HEADING  SPEED_DRIFT HEADING_DRIFT PHINSB   PHINST\n";
 print MTO_FILE  "   Date     Time      Latitude     Longitude    SSTP   DRYT  WMSP  WDIR".
-                "  ATMS  RELH   RDIN\n"; 
-print MTOD_FILE "YEAR    DAYD      LATX      LONX    SSTP  DRYT  WMSP  WDIR   ATMS  RELH    RDIN\n"; 
-print FBOX_FILE  "   Date     Time      Latitude     Longitude      DOXY   SSPS   TUR4  Greenalgea BlueAlgae Diatoms  Cryptophyta YellowSu  CPHL   PHPH\n";
-print FBOXD_FILE "YEAR    DAYD      LATX      LONX     DOXY   SSPS   TUR4  Greenalgea BlueAlgae Diatoms  Cryptophyta YellowSub CPHL   PHPH\n";
+                "  ATMS  RELH\n"; 
+print MTOD_FILE "YEAR    DAYD      LATX      LONX    SSTP  DRYT  WMSP  WDIR   ATMS  RELH\n"; 
+print FBOX_FILE  "   Date     Time      Latitude     Longitude      DOXY   SSPS   FLU2  OSMP LSCT  FLOW\n";
+print FBOXD_FILE "YEAR    DAYD      LATX      LONX     DOXY   SSPS   FLU2  OSMP LSCT  FLOW\n";
 
 &entete_tsgqc($TSGQC_HDL);
 
@@ -304,18 +304,18 @@ LINE:
     #print "Ligne: $_\n";
     ($date,$heure,undef,undef,undef,undef,$code,undef,undef,undef,  #10
     undef,undef,undef,undef,undef,undef,undef,undef,undef,$SSPS_45,   #20
-    undef,undef,$DOX2,undef,undef,undef,undef,undef,undef,undef,   #30
-    undef,undef,undef,$fbox_QC,undef,undef,undef,undef,undef,undef,   #40
+    undef,undef,$DOX2,undef,undef,undef,$FLU2,undef,$scatter,undef,   #30
+    $cdom,$fb_flow,undef,$fbox_QC,undef,undef,undef,undef,undef,undef,   #40
     undef,undef,undef,undef,undef,$sonde_ref,undef,undef,undef,undef,   #50
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,    #60
-    undef,undef,$sonde_18,undef,undef,undef,undef,$SSTP,$SSJT,$CNDC,      #70
+    undef,$sonde_ref,undef,undef,undef,undef,undef,$SSTP,$SSJT,$CNDC,      #70
     $SSPS,,undef,undef,undef,undef,undef,undef,undef,undef,undef, #80
     undef,undef,undef,undef,undef,undef,undef,undef,$tair,$tmer,  #90
     $hum,$patm,undef,undef,undef,undef,$vit,$dir,undef,undef,   #100
-    undef,undef,$phinsb,undef,undef,undef,undef,undef,undef,$phinst, #110
+    undef,undef,$phinsb,undef,undef,undef,undef,undef,$phinsa,undef, #110
    ,undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,   #120
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef,  #130
-    undef,undef,undef,$CPHL,$PHPH, undef,undef,undef,$lat_dec,$long_dec,  #140
+    undef,undef,undef,undef,undef, undef,undef,undef,$lat_dec,$long_dec,  #140
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
@@ -339,10 +339,10 @@ LINE:
     $patm =~ s/\,/\./mg; 
     $vit =~ s/\,/\./mg; 
     $dir =~ s/\,/\./mg; 
-    $rad =~ s/\,/\./mg; 
+    #$rad =~ s/\,/\./mg; 
     $hum =~ s/\,/\./mg; 
     #   $fluo =~ s/\,/\./mg; 
-    $sonde_18 =~ s/\,/\./mg; 
+    $sonde_ref =~ s/\,/\./mg; 
     $sonde_ref =~ s/\,/\./mg; 
     $sog =~ s/\,/\./mg; 
     $cog =~ s/\,/\./mg; 
@@ -351,17 +351,13 @@ LINE:
     $speed_drift =~ s/\,/\./mg;
     $heading_drift =~ s/\,/\./mg;
     $phinsb =~ s/\,/\./mg; 
-    $phinst =~ s/\,/\./mg; 
+    $phinsa =~ s/\,/\./mg; 
     $SSPS_45 =~ s/\,/\./mg; 
     $DOX2 =~ s/\,/\./mg; 
-    $TUR4 =~ s/\,/\./mg; 
-    $Greenalgea =~ s/\,/\./mg; 
-    $BlueAlgae =~ s/\,/\./mg; 
-    $Cryptophyta =~ s/\,/\./mg; 
-    $Diatoms =~ s/\,/\./mg; 
-    $YellowSub =~ s/\,/\./mg; 
-    $CPHL =~ s/\,/\./mg; 
-    $PHPH =~ s/\,/\./mg; 
+    $FLU2 =~ s/\,/\./mg; 
+    $cdom =~ s/\,/\./mg; 
+    $scatter =~ s/\,/\./mg; 
+	$fb_flow =~ s/\,/\./mg; 
 
     # change bad value with 1e36
     $SSJT = 1e36 if $SSJT eq "" or $SSJT < 0;
@@ -374,10 +370,10 @@ LINE:
     $patm = 1e36 if $patm eq "" or $patm < 0;
     $vit = 1e36  if $vit  eq "" or $vit < 0;
     $dir = 1e36 if $dir eq "" or $dir < 0;
-    $rad = 0 if $rad eq "" or $rad < 0;
+    #$rad = 0 if $rad eq "" or $rad < 0;
     #$rad = $rad * 10.0;   # conversion mW/cm2 en W/m2
     $hum = 1e36 if $hum eq ""  or $hum < 0;
-    $sonde_18 = 1e36 if $sonde_18  <= 0 ;
+    $sonde_ref = 1e36 if $sonde_ref  <= 0 ;
     $sonde_ref = 1e36 if $sonde_ref  <= 0 ;
     $sog = 1e36 if $sog  < 0;
     $cog = 1e36 if $cog  < 0;
@@ -386,17 +382,12 @@ LINE:
     $speed = 1e36 if $speed  < 0;
     $heading = 1e36 if $heading  < 0;
     $phinsb = 1e36 if $phinsb  < 0;
-    $phinst = 1e36 if $phinst  < 0;
-    $DOX2 = 1e36 if $DOX2  < 0 or $fbox_QC > 0;
-    $SSPS_45 = 1e36 if $SSPS_45  < 0 or $fbox_QC > 0;
-    $TUR4 = 1e36 if $TUR4 < 0 or $fbox_QC > 0;
-    $Greenalgea = 1e36 if $Greenalgea < 0 or $fbox_QC > 0;
-    $BlueAlgae = 1e36 if $BlueAlgae < 0 or $fbox_QC > 0;
-    $Cryptophyta = 1e36 if $Cryptophyta < 0 or $fbox_QC > 0;
-    $Diatoms = 1e36 if $Diatoms < 0 or $fbox_QC > 0;
-    $YellowSub = 1e36 if $YellowSub < 0 or $fbox_QC > 0;
-    $CPHL = 1e36 if $CPHL < 0 or $fbox_QC > 0;
-    $PHPH = 1e36 if $PHPH < 0 or $fbox_QC > 0;
+    $phinsa = 1e36 if $phinsa  < 0;
+    $DOX2 = 1e36 if $DOX2  < 0 or $fbox_QC == 3 or $fbox_QC == 22;
+    $SSPS_45 = 1e36 if $SSPS_45  < 0 or $fbox_QC == 3 or $fbox_QC == 22;
+    $FLU2 = 1e36 if $FLU2 < 0 or $fbox_QC == 3 or $fbox_QC == 22;
+    $cdom = 1e36 if $cdom < 0 or $fbox_QC == 3 or $fbox_QC == 22;
+    $scatter = 1e36 if $scatter < 0 or $fbox_QC == 3 or $fbox_QC == 22;
     
     #$fluo = 1e36 if $fluo eq "" or $fluo == -4096;
     #print $date . " " . $heure ."\n"; 
@@ -455,22 +446,22 @@ LINE:
     printf SSTD_FILE "%4d %10.9g %+08.4f %+09.4f %6.5g %6.5g %6.5g %6.5g\n",
        $year,$julien,$lat_dec,$long_dec,$SSJT,$SSPS,$CNDC,$SSTP;
     printf SNDD_FILE "%4d %10.9g %+08.4f %+09.4f %6.5g  %6.5g %6.5g %6.5g    %6.5g       %6.5g      %6.5g     %6.5g     %6.5g\n",
-       $year,$julien,$lat_dec,$long_dec,$sonde_ref,$sog,$cog,$speed,$heading,$speed_drift,$heading_drift,$phinsb,$phinst;
-    printf MTOD_FILE "%4d %10.9g %+08.4f %+09.4f %5.4g %5.4g %5.4g %5.4g %5.4g %5.4g %5.4g\n",
-      $year,$julien,$lat_dec,$long_dec,$tmer,$tair,$vit,$dir,$patm,$hum,$rad;
-    printf FBOXD_FILE "%4d %10.9g %+08.4f %+09.4f  %6.5g %6.5g %6.5g   %6.5g    %6.5g    %6.5g     %6.5g     %6.5g %6.5g %6.5g\n",
-       $year,$julien,$lat_dec,$long_dec,$DOX2,$SSPS_45,$TUR4,$Greenalgea,$BlueAlgae,$Diatoms,$Cryptophyta,$YellowSub,$CPHL,$PHPH;
+       $year,$julien,$lat_dec,$long_dec,$sonde_ref,$sog,$cog,$speed,$heading,$speed_drift,$heading_drift,$phinsb,$phinsa;
+    printf MTOD_FILE "%4d %10.9g %+08.4f %+09.4f %5.4g %5.4g %5.4g %5.4g %5.4g %5.4g\n",
+      $year,$julien,$lat_dec,$long_dec,$tmer,$tair,$vit,$dir,$patm,$hum;
+    printf FBOXD_FILE "%4d %10.9g %+08.4f %+09.4f  %6.5g %6.5g %6.5g   %6.5g    %6.5g   %6.5g\n",
+       $year,$julien,$lat_dec,$long_dec,$DOX2,$SSPS_45,$FLU2,$cdom,$scatter,$fb_flow;
     printf SST_FILE "%s %s  %02d°%06.3f %s  %03d°%06.3f %s  %6.5g %6.5g %6.5g %6.5g\n", 
       $date,$heure,$lat_deg,$lat_min,$lat_s,$long_deg,$long_min,$long_s,$SSJT,$SSPS,$CNDC,$SSTP;
     printf SND_FILE "%s %s  %02d°%06.3f %s  %03d°%06.3f %s %6.5g  %6.5g %6.5g %6.5g   %6.5g  %6.5g      %6.5g    %6.5g   %6.5g\n", 
       $date,$heure,$lat_deg,$lat_min,$lat_s,
-      $long_deg,$long_min,$long_s,$sonde_ref,$sog,$cog,$speed,$heading,$speed_drift,$heading_drift,$phinsb,$phinst;
+      $long_deg,$long_min,$long_s,$sonde_ref,$sog,$cog,$speed,$heading,$speed_drift,$heading_drift,$phinsb,$phinsa;
     printf MTO_FILE "%s %s  %02d°%06.3f %s  %03d°%06.3f %s  ".
-                    "%5.4g %5.4g %5.4g %5.4g %5.4g %5.4g %5.4g\n", 
+                    "%5.4g %5.4g %5.4g %5.4g %5.4g %5.4g\n", 
        $date,$heure,$lat_deg,$lat_min,$lat_s,
-       $long_deg,$long_min,$long_s,$tmer,$tair,$vit,$dir,$patm,$hum,$rad;
-    printf FBOX_FILE "%s %s  %02d°%06.3f %s  %03d°%06.3f %s   %6.5g %6.5g %6.5g   %6.5g    %6.5g    %6.5g     %6.5g     %6.5g %6.5g %6.5g\n", 
-      $date,$heure,$lat_deg,$lat_min,$lat_s,$long_deg,$long_min,$long_s,$DOX2,$SSPS_45,$TUR4,$Greenalgea,$BlueAlgae,$Diatoms,$Cryptophyta,$YellowSub,$CPHL,$PHPH;
+       $long_deg,$long_min,$long_s,$tmer,$tair,$vit,$dir,$patm,$hum;
+    printf FBOX_FILE "%s %s  %02d°%06.3f %s  %03d°%06.3f %s   %6.5g %6.5g %6.5g   %6.5g    %6.5g   %6.5g\n", 
+      $date,$heure,$lat_deg,$lat_min,$lat_s,$long_deg,$long_min,$long_s,$DOX2,$SSPS_45,$FLU2,$cdom,$scatter, $fb_flow;
     printf $TSGQC_HDL  
           "%04d %02d %02d %02d %02d %02d   %+10.7f   %+11.7f  %6.5g 0    NaN    NaN 0 %6.5g 0    NaN    NaN 0  %6.5g 0   NaN   NaN 0\n", 
           $year,$month,$day,$hour,$min,$sec,$lat_dec,$long_dec,
