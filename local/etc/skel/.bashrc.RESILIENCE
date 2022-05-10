@@ -112,7 +112,7 @@ alias casinonc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=traject
 alias casinosndnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_snd --output=netcdf/OS_"${CRUISE}"_SND.nc'
 alias casinotsgnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_tsg --output=netcdf/OS_"${CRUISE}"_TSG.nc'
 alias casinofboxnc='$OCEANO2OCEANSITES_PL --echo --short --nodtd --data_type=trajectory ascii/"$CRUISElc"_fbox --output=netcdf/OS_"${CRUISE}"_FBOX.nc'
-alias casinopy='oceano.py data/*.csv -c ../config.toml  -i CASINO -k LATITUDE LONGITUDE BATH SSJT SSTP SSPS'
+alias casinopy='oceano.py data/*.csv -c ../config.toml  -i CASINO -k LATITUDE LONGITUDE SSTP DRYT RELH ATMS WMSP WDIR SSPS DOX2 FLU2 OSMP LSCT FLOW BATH SOG COG SPEED HEADING SPEED_DRIFT HEADING_DRIFT PHINSB PHINSA'
 
 # gestion HTML des images DD
 alias msgcol='$IMG2HTML -d /m/${CRUISE}/data-processing/PRODUCTS/MSGCOL -t "${CRUISE} - Meteosat couleur" -n 1'

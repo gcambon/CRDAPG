@@ -319,7 +319,7 @@ LINE:
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
     undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
-    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, 
+    undef,undef,undef,undef,undef,undef,undef,undef,undef,undef, # 180
     undef,undef,undef,undef,$sog,$cog,$speed,$heading,$speed_drift,$heading_drift # 190 
     ) = split(/\t/);
     #next LINE if $mode !~ /GPS/;  # si pas GPS on saute la ligne

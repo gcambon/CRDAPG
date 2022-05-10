@@ -3,9 +3,9 @@ author         = "proussel-jgrelet IRD mai 2022 RESILIENCE cruise"
 debug          = false
 echo           = true
 codeRoscop     = 'code_roscop.csv'
-ASCII          = "ascii"
-NETCDF         = "netcdf"
-odv            = "odv"
+ASCII          = "ascii/python"
+NETCDF         = "netcdf/python"
+odv            = "odv/python"
 title			= ''
 history		= ''
 institution = 'IRD'
@@ -258,15 +258,30 @@ comment        = "Extract from .csv files"
 	DATE = '(\d+)/(\d+)/(\d+)'
 
        	[casino.split]
-	LATITUDE = 2
-	LONGITUDE = 3
+	LATITUDE = 139
+	LONGITUDE = 140
+	SSTP = 90
+	SSPS = 20
+	WMSP = 97
+	WDIR = 98
+	DRYT = 89
+	RELH = 91
+	ATMS = 92
+	DOX2 = 23
+	FLU2 = 27
+	OSMP = 31
+	LSCT = 29
+	FLOW = 32
 	BATH = 35
-	SSTP = 94
-	SSJT = 95
-	SSPS = 96
-	WMSP = 65
-	WDIR = 64
-	DRYT = 66
-	RELH = 68
+	SOG = 185
+	COG = 186
+	SPEED = 187
+	HEADING = 188
+	SPEED_DRIFT = 189
+	HEADING_DRIFT = 190
+	PHINSB = 103
+	PHINSA = 109
+	
+	
 	
 
