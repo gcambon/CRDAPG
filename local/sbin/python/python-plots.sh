@@ -33,8 +33,9 @@ if [[ $plot_XBT == 1 ]]; then
     # all profiles
     $LOCAL/sbin/python/plots.py $NC_DIR/OS_${CRUISE}_XBT.nc -t XBT -p -k DEPTH TEMP DENS SVEL -c k- b- k- g- -g -o plots
     
-    # # gc section
-    # $LOCAL/sbin/python/plots.py $NC_DIR/OS_${CRUISE}_XBT.nc --type XBT --sections --append CANARIES_1-30N-10W -k DEPTH TEMP --xaxis LATITUDE -l 15 20 --yscale 0 250 250 900 --xinterp 15 --yinterp 10 --clevels=30 --autoscale 0 30 -o $SECT_DIR
+    # # # gc section
+    # $LOCAL/sbin/python/plots.py $NC_DIR/OS_${CRUISE}_XBT.nc --type XBT --sections --append LEG1_SECTION_XBT -k DEPTH TEMP --xaxis LATITUDE -l 15 20 --yscale 0 250 250 900 --xinterp 15 --yinterp 10 --clevels=30 --autoscale 0 30 -o $SECT_DIR
+    
 fi
 
 if [[ $plot_LADCP == 1 ]]; then
@@ -44,4 +45,8 @@ if [[ $plot_LADCP == 1 ]]; then
     LADCP
     # all profiles
     $LOCAL/sbin/python/plots.py $NC_DIR/OS_${CRUISE}_ADCP.nc -t ADCP -p -k DEPTH EWCT NSCT -l 15 20 -c k- r- b- -g -o $PROF_DIR
+
+    # section
+    $LOCAL/sbin/python/plots.py $NC_DIR/OS_${CRUISE}_ADCP.nc --type ADCP --sections --append LEG3_SECTION_XBT -k DEPTH EWCT NSCT --xaxis LATITUDE -l 26 28 --yscale 0 250 250 900 --xinterp 15 --yinterp 10 --clevels=30 --autoscale 0 30 -o $SECT_DIR
+    
 fi

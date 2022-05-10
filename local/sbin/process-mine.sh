@@ -71,6 +71,7 @@ fi
   
   cd $LOCAL/sbin/python
   python-plots.sh $CRUISE $DRIVE
+
   cd $LOCAL/sbin/python
   scatter.py
   
