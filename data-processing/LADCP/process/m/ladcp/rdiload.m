@@ -331,7 +331,8 @@ if data.btrk_used == 1
         disp('>   DETECTED BEAM bottom track coordinates, rotating to EARTH coord.')
         db.use_binremap = 0;
         %velb            = b2earth(velb,vd,db);
-        for ii = 1:length(veld)
+        for ii = 1:length(velb)
+        %for ii = 1:length(veld) ??
             velb(ii,:,:) = beam2earth(squeeze(velb(ii,:,:)),vd(ii,:,:),db);%(beam, head, HeadingOffset, pitch, roll, ssnd, ECssnd, beams_up, xfreq, convex, sensor_config, BeamAngle);
         end
         for n=1:4

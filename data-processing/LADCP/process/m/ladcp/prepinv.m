@@ -255,8 +255,8 @@ if values.up==1
         grid
         title('Tilt error [degree] consistent with offset')
         
-        streamer([p.name,' Figure 11']);
-        hgsave('tmp/11')
+        streamer([p.name,' Figure 10']);
+        hgsave('tmp/10')
         
         disp('    Adjusted for velocity offset in up and down looking ADCP')
         

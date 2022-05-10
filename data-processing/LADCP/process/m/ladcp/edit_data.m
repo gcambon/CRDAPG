@@ -407,8 +407,8 @@ xlabel('Ensemble #');
 ylabel('Bin #');
 title('After Data Editing');
 
-streamer([p.name,'  Figure 15']);
-hgsave('tmp/15')
+streamer([p.name,'  Figure 14']);
+hgsave('tmp/14')
 
 
 ind              = find(isnan(d.ts_edited));
@@ -443,5 +443,5 @@ xlabel('Ensemble #');
 ylabel('Bin #');
 title('After Data Editing');
 
-streamer([p.name,'  Figure 16']);
-hgsave('tmp/16')
+streamer([p.name,'  Figure 15']);
+hgsave('tmp/15')

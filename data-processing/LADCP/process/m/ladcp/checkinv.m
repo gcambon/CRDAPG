@@ -149,6 +149,6 @@ if isfield(de,'type_constraints')
   xlabel('super ensemble')
   set(gca,'Xlim',[0 size(de.ctd_constraints(ic,:),2)+1]);
 
-  streamer([p.name,'  Figure 13']);
-  hgsave('tmp/13')
+  streamer([p.name,'  Figure 12']);
+  hgsave('tmp/12')
 end

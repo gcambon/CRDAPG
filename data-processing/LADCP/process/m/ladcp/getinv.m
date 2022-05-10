@@ -207,7 +207,7 @@ ylabel('Bin #');
 title('Weights based on standard deviation of super ensembles')
 
 drawnow
-hgsave('tmp/17')
+hgsave('tmp/16')
 
 wm          = reshape(wm,nt*nbin,1);
 

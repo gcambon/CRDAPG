@@ -152,15 +152,15 @@ drawnow
 % for the real profile time period extract the SADCP data
 % and average it
 %
-[data,messages]                = calc_sadcp2_av(data,p,values,messages);
-drawnow
+%[data,messages]                = calc_sadcp2_av(data,p,values,messages);
+%drawnow
 
 %
 % for the real profile time period extract the DVL data
 % and average it
 %
-[data,messages]                = calc_dvl_av(data,p,values,messages);
-drawnow
+%[data,messages]                = calc_dvl_av(data,p,values,messages);
+%drawnow
 
 %
 % Plot a summary plot of the raw data
@@ -276,8 +276,8 @@ else
     axis off
 end
 
-streamer([p.name,' Figure 12']);
-hgsave('tmp/12')
+streamer([p.name,' Figure 11']);
+hgsave('tmp/11')
 
 
 %----------------------------------------------------------------------

@@ -405,7 +405,7 @@ text(0.54,10,[' Zbottom  ',int2str(p.zbottom),' [m]'])
 
  
 %streamer([p.name,' Figure 13']);
-suplabel([p.name,' Figure 14'],'t');
+suplabel([p.name,' Figure 13'],'t');
 
 orient tall
-hgsave('tmp/14');
+hgsave('tmp/13');
