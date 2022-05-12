@@ -29,16 +29,17 @@ CM = nc.cycle_mesure
 # parameters
 ## bounding
 latmin = -32.5
-latmax = -29.4
+latmax = -31.5
 #
 lonmin = 29
-lonmax = 31.8
+lonmax = 30.1
 
 ##caxis
 vmin_salt = 35.2
-vmax_salt = 35.6
-vmin_temp = 23
-vmax_temp = 26
+vmax_salt = 35.5
+
+vmin_temp = 21
+vmax_temp = 25
 #
 markersize = 25
 

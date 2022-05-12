@@ -18,72 +18,75 @@ if [ -f ${DRIVE}/${CRUISE}/local/etc/skel/.bashrc.${CRUISE} ]; then
 else
   echo "Can't source file !!! check your network, hard drive and/or ENV variables !!!"
 fi
+
+###exit
+
 # check alias for debug
 #alias
 
-  # echo ""
-  # echo "CTD processing:"
-  # echo "---------------"
-  # CTD
-  # ctd
-  # ctdnc
-  # ctdall
-  # ctdallnc
-  # btl
-  # btlnc
+echo ""
+echo "CTD processing:"
+echo "---------------"
+CTD
+ctd
+ctdnc
+ctdallpl
+ctdallnc
+btl
+btlnc
 
-  echo ""
-  echo "TSG processing:"
-  echo "---------------"
-  TSG
-  tsg
-  tsgnc
-  ctd-tsg
+echo ""
+echo "TSG processing:"
+echo "---------------"
+TSG
+tsg
+tsgnc
+ctd-tsg
 
-  # echo ""
-  # echo "XBT processing:"
-  # echo "---------------"
-  # XBT
-  # xbt
-  # xbtnc
+# echo ""
+# echo "XBT processing:"
+# echo "---------------"
+# XBT
+# xbt
+# xbtnc
 
-  # echo ""
-  # echo "LADCP processing:"
-  # echo "-----------------"
-  # LADCP
-  # ladcp
-  # ladcpnc
+echo ""
+echo "LADCP processing:"
+echo "-----------------"
+LADCP
+ladcp
+ladcpnc
 
-  # echo ""
-  # echo "CASINO processing:"
-  # echo "------------------"
-  # CASINO
-  # casino
-  # casinonc
-  # casinosndnc
-  # casinotsgnc
-  # casinofboxnc
-  
-  # plot profiles and sections
-  echo ""
-  echo "Python plots processing:"
-  echo "------------------------"
-  
-  cd $LOCAL/sbin/python
-  python-plots.sh $CRUISE $DRIVE
+echo ""
+echo "CASINO processing:"
+echo "------------------"
+CASINO
+casino
+casinonc
+casinosndnc
+casinotsgnc
+casinofboxnc
 
-  cd $LOCAL/sbin/python
-  scatter.py
-  
-  # echo ""
-  # echo "GoogleEarth cruisetrack processing:"
-  # echo "------------------------------------"
-  # CTD
-  # cd tracks
-  # $LOCAL/sbin/linux/cruiseTrack2kml-linux-amd64 -config ../../local.toml -output $CRUISElc-local.kml 
-  # #$LOCAL/sbin/linux/cruiseTrack2kml-linux-amd64 -config ../../config.toml -output $CRUISElc.kml 
+# plot profiles and sections
+echo ""
+echo "Python plots processing:"
+echo "------------------------"
+
+cd $LOCAL/sbin/python
+python-plots.sh $CRUISE $DRIVE
+
+cd $LOCAL/sbin/python
+scatter.py
+
+# echo ""
+# echo "GoogleEarth cruisetrack processing:"
+# echo "------------------------------------"
+# CTD
+# cd tracks
+# $LOCAL/sbin/linux/cruiseTrack2kml-linux-amd64 -config ../../local.toml -output $CRUISElc-local.kml 
+# #$LOCAL/sbin/linux/cruiseTrack2kml-linux-amd64 -config ../../config.toml -output $CRUISElc.kml 
 
 echo " "
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" 
-echo "End of process : `/bin/date +%d/%m/%Y_%H:%M:%S`"
+echo "End of process-mine : `/bin/date +%d/%m/%Y_%H:%M:%S`"
 echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" 
